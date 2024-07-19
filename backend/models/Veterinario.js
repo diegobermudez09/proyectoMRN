@@ -1,41 +1,49 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 import generarId from "../helpers/generarId.js";
 
 const veterinarioSchema = mongoose.Schema({
-    nombre:{
+    nombre: {
         type: String,
         required: true,
-        trim: true  
+        trim: true
     },
-    password:{
+    password: {
         type: String,
         required: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true,
-        trim:true
+        trim: true
     },
-    telefono:{
-        type:String,
+    telefono: {
+        type: String,
         default: null,
-        trim:true
+        trim: true
     },
-    web:{
-        type:String,
-        default:null
+    web: {
+        type: String,
+        default: null
     },
-    token:{
+    token: {
         type: String,
         default: generarId()
     },
-    confirmado:{
+    confirmado: {
         type: Boolean,
         default: false
     }
 });
 
-const Veterinario = mongoose.model("Veterinario", veterinarioSchema);
+veterinarioSchema.pre('save', async function (next) {
+    if (!this.isModified("password")) {
+        return next();
+    }
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+});
 
+const Veterinario = mongoose.model("Veterinario", veterinarioSchema);
 export default Veterinario;
