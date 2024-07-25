@@ -40,7 +40,7 @@ const perfil = (req, res) => {
 
     const { veterinario } = req
 
-    res.json({ veterinario })
+    res.json(veterinario)
 };
 
 const confirmar = async (req, res) => {
@@ -144,7 +144,7 @@ const nuevoPassword = async (req, res) => {
         veterinario.token = null;
         veterinario.password = password;
         await veterinario.save();
-        res.json({msg:"Password modificado correctamente"});
+        res.json({ msg: "Password modificado correctamente" });
     } catch (error) {
         console.log(error);
     }
