@@ -14,7 +14,7 @@ app.use(express.json());
 // Conectar a la base de datos
 conectarDB();
 
-const dominiiosPermitidos = ['http://localhost:3000']
+const dominiiosPermitidos = [process.env.FRONTEND_URL];
 
 const corsOptions = {
     origin: function(origin, callback){
