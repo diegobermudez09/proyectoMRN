@@ -10,27 +10,30 @@ import NuevoPassword from './paginas/NuevoPassword'
 import AdministrarPacientes from './paginas/AdministrarPacientes'
 
 import { AuthProvider } from './context/AuthProvider'
+import { PacientesProvider } from './context/PacientesProvider'
 
 function App() {
 
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path='/' element={<AuthLayout />}>
-            <Route index element={<Login />} />
-            <Route path="registrar" element={<Registrar />} />
-            <Route path="olvide-password" element={<OlvidePassword />} />
-            <Route path="olvide-password/:token" element={<NuevoPassword />} />
-            <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
-          </Route>
+        <PacientesProvider>
+          <Routes>
 
-          <Route path='/admin' element={<RutaProtegida />}>
-            <Route index element={<AdministrarPacientes />} />
+            <Route path='/' element={<AuthLayout />}>
+              <Route index element={<Login />} />
+              <Route path="registrar" element={<Registrar />} />
+              <Route path="olvide-password" element={<OlvidePassword />} />
+              <Route path="olvide-password/:token" element={<NuevoPassword />} />
+              <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+            </Route>
 
-          </Route>
+            <Route path='/admin' element={<RutaProtegida />}>
+              <Route index element={<AdministrarPacientes />} />
+            </Route>
 
-        </Routes>
+          </Routes>
+        </PacientesProvider>
       </AuthProvider>
     </BrowserRouter>
   )
