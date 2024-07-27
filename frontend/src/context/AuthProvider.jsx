@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/axios";
+import useAuth from "../hooks/useAuth";
 
 const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
@@ -45,6 +46,9 @@ const AuthProvider = ({ children }) => {
         setAuth({})
     }
 
+    const actualizarPerfil = datos =>{
+        console.log(datos)
+    }
 
     return (
         <AuthContext.Provider
@@ -52,7 +56,8 @@ const AuthProvider = ({ children }) => {
                 auth,
                 setAuth,
                 cargando,
-                cerrarSesion
+                cerrarSesion,
+                actualizarPerfil
             }}
 
         >
