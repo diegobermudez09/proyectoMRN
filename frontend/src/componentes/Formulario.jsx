@@ -34,9 +34,10 @@ const Formulario = () => {
     const { msg } = alerta
     return (
         <>
-            <p className="text-lg text-center mb-10">
+        <h2 className="font-black text-3xl text-center">Administrador de Pacientes</h2>
+            <p className="text-xl mt-5 mb-10 text-center">
                 Añade tus pacientes y {''}
-                <span className="text-indigo-600 font-bold" >Administralos</span>
+                <span className="text-indigo-600 font-bold">Administralos</span>
             </p>
 
             {msg && <Alerta alerta={alerta} />}
